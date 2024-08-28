@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Color } from '../../interfaces/color';
 
@@ -14,5 +14,10 @@ import { Color } from '../../interfaces/color';
 export class SelectColorButtonComponent {
 
   @Input() color!: Color;
+  @Output() onColorSelected = new EventEmitter<Color>();
+
+  selectColor() {
+    this.onColorSelected.emit(this.color);
+  }
 
 }

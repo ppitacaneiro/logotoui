@@ -6,7 +6,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { SelectColorButtonComponent } from './components/select-color-button/select-color-button.component';
 import { CommonModule } from '@angular/common';
 import { Color } from './interfaces/color';
-import { ColorDatePickerComponent } from './modals/color-date-picker/color-date-picker.component';
+import { ColorDatePickerComponent } from './components/color-date-picker/color-date-picker.component';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +25,8 @@ import { ColorDatePickerComponent } from './modals/color-date-picker/color-date-
 export class AppComponent implements OnInit {
   
   title:string = 'LogoToUi - Extract colors from logo';
+  selectedColor!: Color;
+  showColorPicker:boolean = false;
 
   colors: Color[] = [
     {
@@ -53,5 +55,10 @@ export class AppComponent implements OnInit {
     return {
       'background': `linear-gradient(90deg, ${this.colors[1].hex}, ${this.colors[2].hex})`
     }
+  }
+
+  onColorSelected(color: Color) {
+    this.selectedColor = color;
+    this.showColorPicker = true;
   }
 }
