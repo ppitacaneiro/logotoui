@@ -6,6 +6,7 @@ import { LogoComponent } from './components/logo/logo.component';
 import { SelectColorButtonComponent } from './components/select-color-button/select-color-button.component';
 import { CommonModule } from '@angular/common';
 import { Color } from './interfaces/color';
+import { ColorDatePickerComponent } from './modals/color-date-picker/color-date-picker.component';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ import { Color } from './interfaces/color';
     ChooseFileComponent,
     LogoComponent,
     SelectColorButtonComponent,
-    CommonModule
+    CommonModule,
+    ColorDatePickerComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
