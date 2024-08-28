@@ -38,6 +38,7 @@ export class ChooseFileComponent {
 
   extractColorsFromLogo(srcImage:string) {
     extractColors(srcImage).then(colors => {
+      console.log('Colors extracted', colors);
       if (!colors || colors.length === 0) {
         // TODO show error message
         console.error('No colors extracted');
@@ -52,7 +53,7 @@ export class ChooseFileComponent {
         console.error('Less than 3 colors extracted');
       }
 
-      if (colors.length > 3) {
+      if (colors.length >= 3) {
         this.colors = colors;
         this.setColorsAsSelected(3);
         this.colorsExtracted.emit(this.colors);

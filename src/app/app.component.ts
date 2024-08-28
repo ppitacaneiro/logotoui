@@ -46,4 +46,10 @@ export class AppComponent implements OnInit {
       console.log('Flowbite loaded', flowbite);
     });
   }
+
+  get gradient() {
+    return {
+      'background': `linear-gradient(90deg, ${this.colors[1].hex}, ${this.colors[2].hex})`
+    }
+  }
 }
