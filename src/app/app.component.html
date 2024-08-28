@@ -1,13 +1,28 @@
-<section>
-    <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-12">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div class="text-center lg:text-left">
-                <app-logo></app-logo>
-                <app-hero-section></app-hero-section>
+<div class="w-screen h-screen bg-gradient-to-r from-purple-700 to-pink-700">
+    <section>
+        <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="text-center lg:text-left">
+                    <app-logo></app-logo>
+                    <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl lg:text-6xl dark:text-white" [ngStyle]="{ 'color': colors[0].hex }">
+                        Generar UI a partir de logotipo
+                    </h1>
+                    <p class="mb-8 text-lg font-normal text-white lg:text-xl dark:text-gray-400">
+                        Extrae la paleta de colores de un logotipo y genera una interfaz de usuario con colores acordes a la identidad de la marca
+                    </p>
+                    <div class="flex flex-row bg-white border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 p-5">
+                        <div class="flex flex-row items-center justify-center">
+                            <app-select-color-button 
+                                *ngFor="let color of colors"
+                                [color]="color.hex">
+                            </app-select-color-button>
+                        </div>
+                    </div>
+                </div>
+                <app-choosefile></app-choosefile>
             </div>
-            <app-choosefile></app-choosefile>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 <router-outlet />
