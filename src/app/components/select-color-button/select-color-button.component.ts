@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Color } from '../../interfaces/color';
 
 @Component({
   selector: 'app-select-color-button',
@@ -12,6 +13,6 @@ import { CommonModule } from '@angular/common';
 })
 export class SelectColorButtonComponent {
 
-  @Input() color!: string;
+  @Input() color!: Color;
 
 }

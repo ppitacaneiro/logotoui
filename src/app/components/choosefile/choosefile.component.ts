@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { extractColors } from 'extract-colors';
+import { Color } from '../../interfaces/color';
 
 @Component({
   selector: 'app-choosefile',
@@ -9,11 +11,14 @@ import { Component } from '@angular/core';
 })
 export class ChooseFileComponent {
 
+  @Output() colorsExtracted = new EventEmitter<Color[]>();
+
   imageSrc:string = 'yourlogo.jpg';
+  colors:Color[] = [];
 
   onFileSelected(event:Event) {
 
-    // validate image extensions
+    // TODO: validate image extensions
     
     const input = event.target as HTMLInputElement;
     if (!input.files) {
@@ -25,8 +30,41 @@ export class ChooseFileComponent {
     reader.onload = (e) => {
       if (e.target) {
         this.imageSrc = e.target.result as string;
+        this.extractColorsFromLogo(this.imageSrc);
       }
     };
     reader.readAsDataURL(file);
+  }
+
+  extractColorsFromLogo(srcImage:string) {
+    extractColors(srcImage).then(colors => {
+      if (!colors || colors.length === 0) {
+        // TODO show error message
+        console.error('No colors extracted');
+        return;
+      }
+
+      if (colors.length < 3) {
+        this.colors = colors;
+        this.setColorsAsSelected(colors.length);
+        this.colorsExtracted.emit(this.colors);
+        // TODO show modal where user can select the colors
+        console.error('Less than 3 colors extracted');
+      }
+
+      if (colors.length > 3) {
+        this.colors = colors;
+        this.setColorsAsSelected(3);
+        this.colorsExtracted.emit(this.colors);
+      }
+    }).catch(error => {
+      console.error('Error extracting colors', error);
+    });
+  }
+
+  setColorsAsSelected(numberOfColors:number) {
+    for (let i = 0; i < numberOfColors; i++) {
+      this.colors[i].selected = true;
+    }
   }
 }

@@ -14,12 +14,12 @@
                         <div class="flex flex-row items-center justify-center">
                             <app-select-color-button 
                                 *ngFor="let color of colors"
-                                [color]="color.hex">
+                                [color]="color">
                             </app-select-color-button>
                         </div>
                     </div>
                 </div>
-                <app-choosefile></app-choosefile>
+                <app-choosefile (colorsExtracted)="colors = $event"></app-choosefile>
             </div>
         </div>
     </section>

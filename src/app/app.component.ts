@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { FlowbiteService } from './services/flowbite.service';
-import { extractColors } from 'extract-colors';
 import { ChooseFileComponent } from './components/choosefile/choosefile.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { SelectColorButtonComponent } from './components/select-color-button/select-color-button.component';
@@ -24,20 +23,19 @@ import { Color } from './interfaces/color';
 export class AppComponent implements OnInit {
   
   title:string = 'LogoToUi - Extract colors from logo';
-  src:string = 'google-logo.png';
 
   colors: Color[] = [
     {
-      level: 'PRIMARY',
-      hex: '#FACA15'
+      hex: '#FACA15',
+      selected: true
     },
     {
-      level: 'SECONDARY',
-      hex: '#6D2BD7'
+      hex: '#6D2BD7',
+      selected: true
     },
     {
-      level: 'TERCIARY',
-      hex: '#BE125F'
+      hex: '#BE125F',
+      selected: true
     }
   ];
 
@@ -46,12 +44,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.flowbiteService.loadFlowbite(flowbite => {
       console.log('Flowbite loaded', flowbite);
-    });
-  }
-
-  extract() {
-    extractColors(this.src).then(colors => {
-      console.log(colors);
     });
   }
 }
